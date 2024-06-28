@@ -1,10 +1,10 @@
-import { jsx } from "react/jsx-runtime"
 import { Activity } from "../types"
 
 export type ActivityActions =
 	| { type: "save-activity"; payload: { newActivity: Activity } }
 	| { type: "set-activeId"; payload: { id: Activity["id"] } }
 	| { type: "delete-activeId"; payload: { id: Activity["id"] } }
+	| { type: "restart-app" }
 
 export type ActivityState = {
 	activities: Activity[]
@@ -60,5 +60,11 @@ export const activityReducer = (
 		}
 	}
 
+	if (action.type === "restart-app") {
+		return {
+			activities: [],
+			activeId: "",
+		}
+	}
 	return state
 }
